@@ -53,7 +53,7 @@ oc apply -k grafana/resources
 Retrieve all necessary secrets from the OpenShift cluster and apply them to the `datasource.yaml` file found at `grafana/dashboards/datasource.yaml`.
 
 ```bash
-export BEARER_TOKEN=$(oc -n trusted-artifact-signer-monitoring get secrets grafana-sa-token -o=jsonpath="{.data.token}" | base64 -d)
+export BEARER_TOKEN=$(oc -n trusted-artifact-signer-monitoring create token grafana-operator-controller-manager)
 export MYSQL_USER=$(oc -n trillian-system get secrets trillian-mysql -o=jsonpath="{.data.mysql-user}" | base64 -d)
 export MYSQL_PASSWORD=$(oc -n trillian-system get secrets trillian-mysql -o=jsonpath="{.data.mysql-password}" | base64 -d)
 export MYSQL_DATABASE=$(oc -n trillian-system get secrets trillian-mysql -o=jsonpath="{.data.mysql-database}" | base64 -d)
